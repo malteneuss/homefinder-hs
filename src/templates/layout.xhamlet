@@ -1,0 +1,15 @@
+$doctype 5
+<html>
+
+<head>
+    <title>My Site</title>
+</head>
+
+<body>
+    ^{header}
+    ^{nav}
+    ^{mainContent}
+    ^{footer}
+</body>
+
+</html>

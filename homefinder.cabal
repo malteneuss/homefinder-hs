@@ -37,10 +37,15 @@ common shared
     , shower
     , time
     , yesod
+    , yesod-core
 
   hs-source-dirs:     src
   default-language:   GHC2021
+  other-modules:
+    Page.Home
+    AppEnvironment
 
 executable homefinder
   import:  shared
   main-is: Main.hs
+  -- TemplateDirectory: src/templates
