@@ -1,14 +1,43 @@
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE QuasiQuotes #-}
+{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# OPTIONS_GHC -Wno-missing-deriving-strategies #-}
+
 module Main where
 
-import Main.Utf8 qualified as Utf8
+import Yesod
+  ( Html,
+    RenderRoute (renderRoute),
+    Yesod (defaultLayout),
+    mkYesod,
+    parseRoutes,
+    warp,
+    whamlet,
+  )
 
-{- |
- Main entry point.
+data App = App
+  {
+  }
 
- The `, run` script will invoke this function.
--}
+-- Add any fields you want to store in your foundation type here.
+-- appSettings :: AppSettings
+--  , appLogger :: Logger
+--  , appStatic :: Static
+--  , appConnectionPool :: ConnectionPool
+
+-- Derive routes and instances for App.
+mkYesod
+  "App"
+  [parseRoutes|
+/ HomeR GET
+|]
+
+instance Yesod App -- Methods in here can be overridden as needed.
+
+-- The handler for the GET request at /, corresponds to HomeR.
+getHomeR :: Handler Html
+getHomeR = defaultLayout [whamlet|Hello World!|]
+
 main :: IO ()
-main = do
-  -- For withUtf8, see https://serokell.io/blog/haskell-with-utf8
-  Utf8.withUtf8 $ do
-    putTextLn "Hello 🌎"
+main = warp 3000 App
