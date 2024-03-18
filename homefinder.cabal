@@ -38,6 +38,7 @@ common shared
     , time
     , yesod
     , yesod-core
+    , yesod-static
 
   hs-source-dirs:     src
   default-language:   GHC2021
