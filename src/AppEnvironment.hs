@@ -25,5 +25,5 @@ bulmaLayout :: Widget -> Handler Html
 bulmaLayout widget = defaultLayout $ do
   addStylesheet $ StaticR css_bulma_min_css
   -- OR
-  -- addStylesheetRemote "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css"  -- If you're using a CDN
+  -- addStylesheetRemote "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css"  -- If you're using a CDN
   widget
