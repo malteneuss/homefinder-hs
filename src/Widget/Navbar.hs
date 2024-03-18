@@ -6,4 +6,4 @@ import AppEnvironment
 import Yesod
 
 navbar :: Widget
-navbar = $(whamletFile "templates/widget-navbar.xhamlet")
+navbar = $(whamletFile "templates/widget-navbar.hamlet")
