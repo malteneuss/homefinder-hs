@@ -28,8 +28,13 @@ instance Yesod AppEnvironment where
 bulmaLayout :: Widget -> Handler Html
 bulmaLayout w = do
   p <- widgetToPageContent $ do
-    addStylesheet $ StaticR css_bulma_min_css
     -- addStylesheetRemote "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css"  -- If you're using a CDN
+    addStylesheet $ StaticR css_bulma_min_css
+    toWidgetHead
+      [hamlet|
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">        
+        |]
     w
   msgs <- getMessages
   withUrlRenderer
@@ -39,6 +44,7 @@ $doctype 5
 <html>
     <head>
         <title>#{pageTitle p}
+        
         $maybe description <- pageDescription p
           <meta name="description" content="#{description}">
         ^{pageHead p}
