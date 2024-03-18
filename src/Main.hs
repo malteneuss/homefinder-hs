@@ -8,24 +8,13 @@ module Main where
 
 import AppEnvironment
 import Page.Home
+import Settings (AppSettings (appStaticDir), compileTimeAppSettings)
 import Yesod
+import Yesod.Static (static)
 
-mkYesodDispatch "AppEnvironment" $(parseRoutesFile "src/routes.yesodroutes")
+mkYesodDispatch "AppEnvironment" $(parseRoutesFile "config/routes.yesodroutes")
 
--- Add any fields you want to store in your foundation type here.
--- appSettings :: AppSettings
---  , appLogger :: Logger
---  , appStatic :: Static
---  , appConnectionPool :: ConnectionPool
-
--- Derive routes and instances for App.
--- mkYesod
---   "App"
---   [parseRoutes|
--- / HomeR GET
-
-{- | ]
-instance Yesod App -- Methods in here can be overridden as needed.
--}
 main :: IO ()
-main = warp 3000 AppEnvironment
+main = do
+  appStaticDir <- static $ appStaticDir compileTimeAppSettings
+  warp 3000 (AppEnvironment appStaticDir)

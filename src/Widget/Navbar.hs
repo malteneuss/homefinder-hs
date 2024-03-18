@@ -1,9 +1,9 @@
 {-# LANGUAGE TemplateHaskell #-}
 
-module Page.Home where
+module Widget.Navbar where
 
 import AppEnvironment
 import Yesod
 
-getHomeR :: Widget
-getHomeR = $(whamletFile "src/templates/widget-navbar.xhamlet")
+-- getHomeR :: Widget
+-- getHomeR = $(whamletFile "templates/widget-navbar.xhamlet")

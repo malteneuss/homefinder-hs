@@ -45,6 +45,9 @@ common shared
   other-modules:
     Page.Home
     AppEnvironment
+    StaticFiles
+    Settings
+    Widget.Navbar
 
 executable homefinder
   import:  shared
