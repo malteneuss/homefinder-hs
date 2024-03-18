@@ -6,4 +6,4 @@ import AppEnvironment
 import Yesod
 
 getHomeR :: Handler Html
-getHomeR = defaultLayout $(whamletFile "templates/page-home.xhamlet")
+getHomeR = defaultLayout $(whamletFile "templates/page-home.hamlet")
