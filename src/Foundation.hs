@@ -7,20 +7,20 @@
 
 {-# HLINT ignore "Use newtype instead of data" #-}
 
-module AppEnvironment where
+module Foundation where
 
 import StaticFiles
 import Yesod
 import Yesod.Static (Static)
 
--- AppEnvironment
-data AppEnvironment = AppEnvironment
-  { appEnvironmentStatic :: Static
+-- AppEnvironment, what state we keep around and allow access to in all handlers.
+data App = App
+  { appStatic :: Static
   }
 
-mkYesodData "AppEnvironment" $(parseRoutesFile "config/routes.yesodroutes")
+mkYesodData "App" $(parseRoutesFile "config/routes.yesodroutes")
 
-instance Yesod AppEnvironment where
+instance Yesod App where
   defaultLayout :: Widget -> Handler Html
   defaultLayout = bulmaLayout
 

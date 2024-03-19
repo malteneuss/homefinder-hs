@@ -44,7 +44,7 @@ common shared
   default-language:   GHC2021
   other-modules:
     Page.Home
-    AppEnvironment
+    Foundation
     StaticFiles
     Settings
     Widget.Navbar

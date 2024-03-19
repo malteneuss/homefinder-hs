@@ -2,7 +2,7 @@
 
 module Widget.Navbar where
 
-import AppEnvironment
+import Foundation
 import Yesod
 
 navbar :: Widget

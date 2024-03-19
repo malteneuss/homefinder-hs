@@ -2,7 +2,7 @@
 
 module Page.Home where
 
-import AppEnvironment
+import Foundation
 import Widget.Navbar (navbar)
 import Yesod
 

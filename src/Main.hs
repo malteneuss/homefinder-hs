@@ -6,15 +6,15 @@
 
 module Main where
 
-import AppEnvironment
+import Foundation
 import Page.Home
 import Settings (AppSettings (appStaticDir), compileTimeAppSettings)
 import Yesod
 import Yesod.Static (static)
 
-mkYesodDispatch "AppEnvironment" $(parseRoutesFile "config/routes.yesodroutes")
+mkYesodDispatch "App" $(parseRoutesFile "config/routes.yesodroutes")
 
 main :: IO ()
 main = do
   appStaticDir <- static $ appStaticDir compileTimeAppSettings
-  warp 3000 (AppEnvironment appStaticDir)
+  warp 3000 (App appStaticDir)
