@@ -38,5 +38,9 @@ bulmaLayout widget = do
   -- overall html skeleton to add page content to
   withUrlRenderer $(hamletFile "templates/layout-html.hamlet")
 
+-- These Widgets have to be here because they depend on the App type.
 navbar :: Widget
 navbar = $(whamletFile "templates/widget-navbar.hamlet")
+
+footer :: Widget
+footer = $(whamletFile "templates/widget-footer.hamlet")
