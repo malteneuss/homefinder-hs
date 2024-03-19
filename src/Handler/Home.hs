@@ -1,6 +1,6 @@
 {-# LANGUAGE TemplateHaskell #-}
 
-module Page.Home where
+module Handler.Home where
 
 import Foundation
 import Yesod

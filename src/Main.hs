@@ -7,7 +7,7 @@
 module Main where
 
 import Foundation
-import Page.Home
+import Handler.Home
 import Settings (AppSettings (appStaticDir), compileTimeAppSettings)
 import Yesod
 import Yesod.Static (static)
