@@ -39,6 +39,9 @@ common shared
     , yesod
     , yesod-core
     , yesod-static
+    , shakespeare
+    , text
+    , case-insensitive
 
   hs-source-dirs:     src
   default-language:   GHC2021

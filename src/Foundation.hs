@@ -9,7 +9,10 @@
 
 module Foundation where
 
+import Data.CaseInsensitive qualified as CI
+import Data.Text.Encoding qualified as TE
 import StaticFiles
+import Text.Hamlet (hamletFile)
 import Yesod
 import Yesod.Static (Static)
 
@@ -24,32 +27,16 @@ instance Yesod App where
   defaultLayout :: Widget -> Handler Html
   defaultLayout = bulmaLayout
 
--- Copy of default layout but with bulma css.
 bulmaLayout :: Widget -> Handler Html
-bulmaLayout w = do
-  p <- widgetToPageContent $ do
+bulmaLayout widget = do
+  -- msgs <- getMessages
+  pc <- widgetToPageContent $ do
     -- addStylesheetRemote "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css"  -- If you're using a CDN
     addStylesheet $ StaticR css_bulma_min_css
-    toWidgetHead
-      [hamlet|
-          <meta charset="utf-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1">        
-        |]
-    w
-  msgs <- getMessages
-  withUrlRenderer
-    [hamlet|
-$newline never
-$doctype 5
-<html>
-    <head>
-        <title>#{pageTitle p}
-        
-        $maybe description <- pageDescription p
-          <meta name="description" content="#{description}">
-        ^{pageHead p}
-    <body>
-        $forall (status, msg) <- msgs
-            <p class="message #{status}">#{msg}
-        ^{pageBody p}
-          |]
+    -- typical html body skeleton to add widget to
+    $(whamletFile "templates/layout-page.hamlet")
+  -- overall html skeleton to add page content to
+  withUrlRenderer $(hamletFile "templates/layout-html.hamlet")
+
+navbar :: Widget
+navbar = $(whamletFile "templates/widget-navbar.hamlet")
