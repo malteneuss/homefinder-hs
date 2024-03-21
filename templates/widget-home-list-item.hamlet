@@ -1,0 +1,19 @@
+<div .card>
+    <div .card-content>
+        <div .media>
+            <div .media-left>
+                <figure .image .is-64x64>
+                    <img src="" alt="Image for Home 1">
+            <div .media-content>
+                <p .title .is-4>#{home.title} - $#{home.price}
+                <p .subtitle .is-6>#{home.address}
+        <div .content>
+            #{home.sqmLivingSpace}, #{home.roomCount}, #{home.bedrooms}, #{home.bathrooms}, 
+            <br>
+            #{home.details}
+            <br>
+            <a href="#{home.sourceUrl}">Source</a> <small>#{home.lastFetchDate}
+
+
+
+

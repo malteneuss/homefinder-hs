@@ -50,7 +50,7 @@ common shared
     Foundation
     StaticFiles
     Settings
-    Widget.Navbar
+    Widget.HomeListItem
 
 executable homefinder
   import:  shared

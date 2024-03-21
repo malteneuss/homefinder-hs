@@ -7,27 +7,5 @@
 
 <section .section>
     <div .container>
-        <!-- Home Listing 1 -->
-        <div .card>
-            <div .card-content>
-                <div .media>
-                    <div .media-left>
-                        <figure .image .is-64x64>
-                            <img src="" alt="Image for Home 1">
-                    <div .media-content>
-                        <p .title .is-4>Home 1
-                        <p .subtitle .is-6>$500,000
-                    <div .content>
-                        3 beds, 2 baths, 2000 sqft
-        <!-- Home Listing 2 -->
-        <div .card>
-            <div .card-content>
-                <div .media>
-                    <div .media-left>
-                        <figure .image .is-64x64>
-                            <img src= alt="Image for Home 2">
-                    <div .media-content>
-                        <p .title .is-4>Home 2
-                        <p .subtitle .is-6>$600,000
-                    <div .content>
-                        4 beds, 3 baths, 2500 sqft
+        $forall homeListItem <- homeListItems
+            ^{homeListItem}
