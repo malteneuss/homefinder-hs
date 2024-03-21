@@ -3,16 +3,23 @@
         <div .media>
             <div .media-left>
                 <figure .image .is-64x64>
-                    <img src="" alt="Image for Home 1">
+                    $maybe imageUrl <- home.imageUrl
+                        <img src="#{imageUrl}" alt="Home Image">
+                    $nothing
+                        <img src="/static/img/64x64.webp" alt="Image placeholder">
             <div .media-content>
-                <p .title .is-4>#{home.title} - $#{home.price}
-                <p .subtitle .is-6>#{home.address}
+                <p .title .is-4>#{home.title}
+                <p .subtitle .is-6>
+                     #{home.price}
+                     <br>
+                     <small>#{home.address}
         <div .content>
-            #{home.sqmLivingSpace}, #{home.roomCount}, #{home.bedrooms}, #{home.bathrooms}, 
+            #{home.sqmLivingSpace}, #{home.rooms}, #{home.bedrooms}, #{home.bathrooms}, 
             <br>
             #{home.details}
             <br>
-            <a href="#{home.sourceUrl}">Source</a> <small>#{home.lastFetchDate}
+            <a href="#{home.sourceUrl}">Source</a> 
+            <small>#{home.lastFetchDate}
 
 
 
