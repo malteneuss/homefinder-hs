@@ -1,4 +1,4 @@
-<div .card>
+<div .card margin-bottom-1>
     <div .card-content>
         <div .media>
             <div .media-left>
@@ -18,8 +18,9 @@
             <br>
             #{home.details}
             <br>
-            <a href="#{home.sourceUrl}">Source</a> 
-            <small>#{home.lastFetchDate}
+            <p .has-text-right>
+                <small .has-text-weight-light>#{home.lastFetchDate}
+                <a href="#{home.sourceUrl}" >Quelle 
 
 
 
