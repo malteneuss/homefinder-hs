@@ -11,8 +11,11 @@ module Foundation where
 
 import StaticFiles
 import Text.Hamlet (hamletFile)
+import Text.Julius (juliusFile)
 import Yesod
 import Yesod.Static (Static)
+-- import Yesod.Default.Util (widgetFileNoReload)
+-- import Data.Default (def)
 
 -- AppEnvironment, what state we keep around and allow access to in all handlers.
 data App = App
@@ -31,10 +34,15 @@ bulmaLayout widget = do
   pc <- widgetToPageContent $ do
     -- addStylesheetRemote "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css"  -- If you're using a CDN
     addStylesheet $ StaticR css_bulma_min_css
-    -- typical html body skeleton to add widget to
+    -- typical html body skeleton with navbar and footer to add widget to
+    -- $(widgetFileNoReload def "templates/layout-page")
+    toWidgetHead $(juliusFile "templates/layout-page.julius")
     $(whamletFile "templates/layout-page.hamlet")
   -- overall html skeleton to add page content to
   withUrlRenderer $(hamletFile "templates/layout-html.hamlet")
+
+
+-- Helper functions 
 
 -- These Widgets have to be here because they depend on the App type.
 navbar :: Widget

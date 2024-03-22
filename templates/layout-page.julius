@@ -1,0 +1,22 @@
+// Navbar-burger toggle on touch devices
+document.addEventListener('DOMContentLoaded', () => {
+
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    // Add a generic click event on each of them
+    $navbarBurgers.forEach(el => {
+        el.addEventListener('click', () => {
+
+            // Get the targetId string from the "data-target" attribute
+            const targetId = el.dataset.target;
+            const $target = document.getElementById(targetId);
+
+            // Toggle the "is-active" class on both the element itself
+            // e.g. "navbar-burger" 
+            el.classList.toggle('is-active');
+            // and its target, e.g. the "navbar-menu"
+            $target.classList.toggle('is-active');
+        });
+    });
+});
