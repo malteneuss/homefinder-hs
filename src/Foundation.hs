@@ -9,8 +9,6 @@
 
 module Foundation where
 
-import Data.CaseInsensitive qualified as CI
-import Data.Text.Encoding qualified as TE
 import StaticFiles
 import Text.Hamlet (hamletFile)
 import Yesod
