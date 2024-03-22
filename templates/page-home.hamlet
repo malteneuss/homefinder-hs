@@ -1,9 +1,9 @@
-<section .section>
+<section .section .pb-0>
     <div .container>
         <h1 .title>
-            Hello World
+            Finde dein Zuhause
         <p .subtitle>
-            My first website with <strong>Bulma</strong>!
+            Filter...
 
 <section .section>
     <div .container>
