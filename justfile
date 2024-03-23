@@ -17,3 +17,7 @@ fmt:
 # Run ghcid -- auto-recompile and run `main` function
 run:
     ghcid -c "cabal repl exe:homefinder" --warnings -T :main
+
+# Start and seed local database, and autoremove all state with Ctrl+c
+db:
+    docker-compose -f ./db/dev-docker-compose.yml run db 
