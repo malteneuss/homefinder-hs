@@ -17,12 +17,15 @@ import Yesod.Static (Static)
 -- import Yesod.Default.Util (widgetFileNoReload)
 -- import Data.Default (def)
 
--- AppEnvironment, what state we keep around and allow access to in all handlers.
+-- App(Environment): state we keep around while this app is running, 
+-- database connections, loggers etc.
+-- All handlers have access to this value.
 data App = App
   { appStatic :: Static
   }
 
 mkYesodData "App" $(parseRoutesFile "config/routes.yesodroutes")
+
 
 instance Yesod App where
   defaultLayout :: Widget -> Handler Html

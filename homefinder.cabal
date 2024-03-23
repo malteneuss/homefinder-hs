@@ -42,6 +42,9 @@ common shared
     , shakespeare
     , text
     , case-insensitive
+    , file-embed
+    , yaml
+    , bytestring
 
   hs-source-dirs:     src
   default-language:   GHC2021

@@ -7,14 +7,27 @@
 module Main where
 
 import Foundation
-import Handler.Home
-import Settings (AppSettings (appStaticDir), compileTimeAppSettings)
-import Yesod
+import Handler.Home (getHomeR)
+import Settings (AppSettings (AppSettings, appStaticDir), compileTimeAppSettings, compileTimeConfigSettings)
+import Yesod (mkYesodDispatch, parseRoutesFile, warp)
+import Yesod.Default.Config2 (loadYamlSettingsArgs, useEnv)
 import Yesod.Static (static)
 
 mkYesodDispatch "App" $(parseRoutesFile "config/routes.yesodroutes")
 
 main :: IO ()
 main = do
+  appSettings <-
+    loadYamlSettingsArgs
+      -- fall back to compile-time values, set to [] to require values at runtime
+      [compileTimeConfigSettings]
+      -- allow environment variables to override
+      useEnv
+  app <- mkFoundation appSettings
+  warp 3000 app
+
+mkFoundation :: AppSettings -> IO App
+mkFoundation appSettings = do
   appStaticDir <- static $ appStaticDir compileTimeAppSettings
-  warp 3000 (App appStaticDir)
+  print appSettings
+  return $ App{appStatic = appStaticDir}

@@ -27,13 +27,13 @@ ip-from-header: "_env:IP_FROM_HEADER:false"
 # skip-combining: false
 # auth-dummy-login : false
 
-# database connection has no default value, so it must be set in the environment,
+# database connection has no valid default value, so it must be set in the environment,
 # e.g. locally via a .env file and direnv to allow to use the same values in docker-compose.
-database-host: "_env:DATABASE_HOST"
-database-port: "_env:DATABASE_PORT"
-database-user: "_env:DATABASE_USER"
-database-password: "_env:DATABASE_PASSWORD"
-database-name: "_env:DATABASE_NAME"
+database-host: "_env:DATABASE_HOST:error"
+database-port: "_env:DATABASE_PORT:error"
+database-user: "_env:DATABASE_USER:error"
+database-password: "_env:DATABASE_PASSWORD:error"
+database-name: "_env:DATABASE_NAME:error"
 
   # See config/test-settings.yml for an override during tests
 database-poolsize: "_env:DATABASE_POOLSIZE:10"
