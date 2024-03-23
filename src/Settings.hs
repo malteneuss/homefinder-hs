@@ -25,6 +25,7 @@ data AppSettings = AppSettings
     , appDatabaseUser :: String
     , appDatabasePassword :: String
     , appDatabaseName :: String
+    , appDatabasePoolsize :: Int
     }
     deriving stock (Show)
 
@@ -57,7 +58,7 @@ instance FromJSON AppSettings where
         appDatabasePassword <- o .: "database-password"
         appDatabaseName <- o .: "database-name"
         -- appIpFromHeader <- o .: "ip-from-header"
-        -- appDatabasePoolsize <- o .: "database-poolsize"
+        appDatabasePoolsize <- o .: "database-poolsize"
 
         -- dev                       <- o .:? "development"      .!= defaultDev
 

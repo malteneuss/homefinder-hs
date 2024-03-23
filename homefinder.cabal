@@ -45,6 +45,10 @@ common shared
     , file-embed
     , yaml
     , bytestring
+    , persistent
+    , persistent-postgresql
+    , monad-logger
+    , fast-logger   
 
   hs-source-dirs:     src
   default-language:   GHC2021

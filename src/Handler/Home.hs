@@ -2,16 +2,23 @@
 
 module Handler.Home where
 
+import Data.Time.Clock (UTCTime)
+import Database.Persist.Postgresql (Single (..), rawSql)
 import Foundation
 import Widget.HomeListItem
 import Yesod
 
 getHomeR :: Handler Html
-getHomeR = defaultLayout $ do
-    setTitle "Homes"
+getHomeR = do
+    result <- runDB $ rawSql "SELECT CURRENT_TIMESTAMP" []
+    case result of
+        (Single (timestamp :: UTCTime)) : _ -> liftIO $ print timestamp
+        _ -> liftIO $ putStrLn "Failed to establish connection."
+    defaultLayout $ do
+        setTitle "Homes"
 
-    let homeListItems = fmap mkHomeListItemWidget $ concat $ replicate 5 [fakeHomeListItem, fakeHomeListItem2]
-    $(whamletFile "templates/page-home.hamlet")
+        let homeListItems = fmap mkHomeListItemWidget $ concat $ replicate 5 [fakeHomeListItem, fakeHomeListItem2]
+        $(whamletFile "templates/page-home.hamlet")
 
 fakeHomeListItem :: HomeListItem
 fakeHomeListItem =
@@ -50,4 +57,3 @@ fakeHomeListItem2 =
         , firstFetchDate = "seit 2022-03-01"
         , lastFetchDate = "vom 2022-04-10"
         }
-        

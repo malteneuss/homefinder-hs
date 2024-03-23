@@ -9,27 +9,39 @@
 
 module Foundation where
 
+import Database.Persist.Sql (ConnectionPool, SqlBackend, SqlPersistT, runSqlPool)
 import StaticFiles
 import Text.Hamlet (hamletFile)
 import Text.Julius (juliusFile)
 import Yesod
 import Yesod.Static (Static)
+import Yesod.Core.Types (Logger)
+
 -- import Yesod.Default.Util (widgetFileNoReload)
 -- import Data.Default (def)
 
--- App(Environment): state we keep around while this app is running, 
+-- App(Environment): state we keep around while this app is running,
 -- database connections, loggers etc.
 -- All handlers have access to this value.
 data App = App
   { appStatic :: Static
+  , appDbConnPool :: ConnectionPool
+  -- ^ Database connection pool.
+  , appLogger :: Logger
   }
 
 mkYesodData "App" $(parseRoutesFile "config/routes.yesodroutes")
 
-
 instance Yesod App where
   defaultLayout :: Widget -> Handler Html
   defaultLayout = bulmaLayout
+
+instance YesodPersist App where
+  type YesodPersistBackend App = SqlBackend
+  runDB :: SqlPersistT Handler a -> Handler a
+  runDB action = do
+    app <- getYesod
+    runSqlPool action $ appDbConnPool app
 
 bulmaLayout :: Widget -> Handler Html
 bulmaLayout widget = do
@@ -38,14 +50,13 @@ bulmaLayout widget = do
     -- addStylesheetRemote "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css"  -- If you're using a CDN
     addStylesheet $ StaticR css_bulma_min_css
     -- typical html body skeleton with navbar and footer to add widget to
-    -- $(widgetFileNoReload def "templates/layout-page")
+    -- \$(widgetFileNoReload def "templates/layout-page")
     toWidgetHead $(juliusFile "templates/layout-page.julius")
     $(whamletFile "templates/layout-page.hamlet")
   -- overall html skeleton to add page content to
   withUrlRenderer $(hamletFile "templates/layout-html.hamlet")
 
-
--- Helper functions 
+-- Helper functions
 
 -- These Widgets have to be here because they depend on the App type.
 navbar :: Widget

@@ -12,4 +12,5 @@ services:
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
       POSTGRES_DB: ${DATABASE_NAME}
     ports:
-      - 5432:5432
+      # 5432 is the default port for postgres
+      - ${DATABASE_PORT}:5432

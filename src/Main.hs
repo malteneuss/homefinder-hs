@@ -6,11 +6,21 @@
 
 module Main where
 
-import Foundation
+import Control.Monad.Logger (liftLoc, runLoggingT)
+import Data.ByteString (ByteString)
+import Data.Text as T
+import Data.Text.Encoding (encodeUtf8)
+import Database.Persist.Postgresql (createPostgresqlPool)
+import Foundation (App (..), Route (HomeR, StaticR))
 import Handler.Home (getHomeR)
-import Settings (AppSettings (AppSettings, appStaticDir), compileTimeAppSettings, compileTimeConfigSettings)
-import Yesod (mkYesodDispatch, parseRoutesFile, warp)
-import Yesod.Default.Config2 (loadYamlSettingsArgs, useEnv)
+import Settings (AppSettings (..), compileTimeAppSettings, compileTimeConfigSettings)
+import System.Log.FastLogger (
+  defaultBufSize,
+  newStdoutLoggerSet,
+  toLogStr,
+ )
+import Yesod (liftIO, messageLoggerSource, mkYesodDispatch, parseRoutesFile, runDB, warp)
+import Yesod.Default.Config2 (loadYamlSettingsArgs, makeYesodLogger, useEnv)
 import Yesod.Static (static)
 
 mkYesodDispatch "App" $(parseRoutesFile "config/routes.yesodroutes")
@@ -24,10 +34,49 @@ main = do
       -- allow environment variables to override
       useEnv
   app <- mkFoundation appSettings
+
   warp 3000 app
 
 mkFoundation :: AppSettings -> IO App
 mkFoundation appSettings = do
-  appStaticDir <- static $ appStaticDir compileTimeAppSettings
+  appStatic <- static $ appStaticDir compileTimeAppSettings
+  appLogger <- newStdoutLoggerSet defaultBufSize >>= makeYesodLogger
   print appSettings
-  return $ App{appStatic = appStaticDir}
+  -- We need a log function to create a connection pool. We need a connection
+  -- pool to create our foundation. And we need our foundation to get a
+  -- logging function. To get out of this loop, we initially create a
+  -- temporary foundation without a real connection pool, get a log function
+  -- from there, and then create the real foundation.
+  -- let fakeFoundation :: App
+  --     fakeFoundation = error "FakeFoundation forced in tempFoundation"
+  let mkFakeFoundation fakeDbConnPool =
+        App
+          { appStatic
+          , appDbConnPool = fakeDbConnPool
+          , -- , appHttpManager
+            appLogger
+          }
+  let fakeFoundation = mkFakeFoundation $ error "connPool forced in tempFoundation"
+  -- messageLoggerSource needs our Foundation App value to use
+  -- the shouldLogIO function from its Yesod instance.
+  -- logFunc :: Loc -> LogSource -> LogLevel -> LogStr -> IO ()
+  let logFunc = messageLoggerSource fakeFoundation appLogger
+  print (mkConnectionString appSettings)
+  appDbConnPool <-
+    flip runLoggingT logFunc $
+      createPostgresqlPool (mkConnectionString appSettings) (appDatabasePoolsize appSettings)
+  return $ App{appStatic, appDbConnPool, appLogger}
+
+mkConnectionString :: AppSettings -> ByteString
+mkConnectionString appSettings =
+  encodeUtf8 $
+    T.concat
+      [ "host="
+      , T.pack (appDatabaseHost appSettings)
+      , " dbname="
+      , T.pack (appDatabaseName appSettings)
+      , " user="
+      , T.pack (appDatabaseUser appSettings)
+      , " password="
+      , T.pack (appDatabasePassword appSettings)
+      ]

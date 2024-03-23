@@ -93,6 +93,8 @@
           ];
           nativeBuildInputs = with pkgs; [
             just
+            # needed for command line tools like pg_config and psql
+            postgresql_15
           ];
         };
       };

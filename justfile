@@ -20,4 +20,6 @@ run:
 
 # Start and seed local database, and autoremove all state with Ctrl+c
 db:
-    docker-compose -f ./db/docker-compose.yml run db 
+    docker-compose -f ./db/docker-compose.yml up
+dbdown:
+    docker-compose -f ./db/docker-compose.yml down -v
