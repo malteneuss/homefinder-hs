@@ -8,8 +8,7 @@
 module Settings where
 
 import Control.Exception qualified as Exception
-import Data.Aeson (FromJSON, Result (..), fromJSON, parseJSON, withObject, (.!=), (.:), (.:?))
-import Data.ByteString (ByteString)
+import Data.Aeson (FromJSON, Result (..), fromJSON, parseJSON, withObject, (.:))
 import Data.FileEmbed (embedFile)
 import Data.Yaml (Value, decodeEither')
 import Yesod.Default.Config2 (applyEnvValue, configSettingsYml)

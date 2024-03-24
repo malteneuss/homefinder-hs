@@ -6,7 +6,7 @@
 
 module Main where
 
-import Control.Monad.Logger (liftLoc, runLoggingT, runStdoutLoggingT)
+import Control.Monad.Logger (runLoggingT, runStdoutLoggingT)
 import DB.Model (migrateAll)
 import Data.ByteString (ByteString)
 import Data.Text as T
@@ -18,9 +18,8 @@ import Settings (AppSettings (..), compileTimeAppSettings, compileTimeConfigSett
 import System.Log.FastLogger (
   defaultBufSize,
   newStdoutLoggerSet,
-  toLogStr,
  )
-import Yesod (liftIO, messageLoggerSource, mkYesodDispatch, parseRoutesFile, runDB, warp)
+import Yesod (messageLoggerSource, mkYesodDispatch, parseRoutesFile, warp)
 import Yesod.Default.Config2 (loadYamlSettingsArgs, makeYesodLogger, useEnv)
 import Yesod.Static (static)
 
