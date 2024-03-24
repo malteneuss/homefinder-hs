@@ -1,5 +1,6 @@
 INSERT INTO
     home (
+        id,
         title,
         price,
         address,
@@ -18,6 +19,7 @@ INSERT INTO
     )
 VALUES
     (
+        '23d2212c-7f27-4bf5-b516-258512c84df4',
         'Gemütliches Stadthaus in zentraler Lage',
         450000,
         'Berlin',
@@ -35,6 +37,7 @@ VALUES
         '2022-02-16 10:00:00'
     ),
     (
+        '04a4a3b2-b1e9-45d7-a692-a544f54d90e2',
         'Luxuriöse Villa am See',
         1500000,
         'Munich',
@@ -52,6 +55,7 @@ VALUES
         '2022-02-16 11:00:00'
     ),
     (
+        '5b4f3362-4890-47f6-a525-7cd409432cc2',
         'Moderne Wohnung in der Innenstadt',
         300000,
         'Hamburg',
@@ -69,6 +73,7 @@ VALUES
         '2022-02-16 12:00:00'
     ),
     (
+        'c129b633-3a58-41a4-9121-2d75ab229faf',
         'Einfamilienhaus im Grünen',
         500000,
         'Cologne',
@@ -86,6 +91,7 @@ VALUES
         '2022-02-16 13:00:00'
     ),
     (
+        '82a8cb54-92ac-451a-9242-1ba671be468d',
         'Gemütliche Dachgeschosswohnung',
         200000,
         'Frankfurt',
@@ -103,6 +109,7 @@ VALUES
         '2022-02-16 14:00:00'
     ),
     (
+        '0ccb6e95-0f56-4689-a0d9-4df64df44494',
         'Großes Einfamilienhaus mit Garten',
         800000,
         'Stuttgart',
@@ -120,6 +127,7 @@ VALUES
         '2022-02-16 15:00:00'
     ),
     (
+        '8f21e9f2-e6ea-462d-b797-f2163c9eb193',
         'Stilvolle Altbauwohnung',
         400000,
         'Dresden',
@@ -137,6 +145,7 @@ VALUES
         '2022-02-16 16:00:00'
     ),
     (
+        '970bf858-e497-4ddc-af11-ecc14d1c832d',
         'Modernes Loft in angesagtem Viertel',
         600000,
         'Hannover',
@@ -154,6 +163,7 @@ VALUES
         '2022-02-16 17:00:00'
     ),
     (
+        'ccecf725-c4f4-4709-82b9-423e33058b4e',
         'Charmantes Reihenhaus mit Garten',
         350000,
         'Leipzig',
@@ -171,6 +181,7 @@ VALUES
         '2022-02-16 18:00:00'
     ),
     (
+        'e77ef11d-e4d8-4693-940e-c02d4b6ad7ad',
         'Großzügige Penthouse-Wohnung',
         900000,
         'Düsseldorf',
@@ -186,4 +197,4 @@ VALUES
         '2022-02-15',
         '2022-02-16 19:00:00',
         '2022-02-16 19:00:00'
-    );
+    ) ON CONFLICT (id) DO NOTHING;
