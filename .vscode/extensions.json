@@ -6,6 +6,10 @@
     "bbenoist.nix",
     "jnoortheen.nix-ide",
     "tamasfe.even-better-toml",
-    "mkhl.direnv"
+    "mkhl.direnv",
+    "adpyke.vscode-sql-formatter",
+    "k--kato.intellij-idea-keybindings",
+    "vscodevim.vim",
+    "davidanson.vscode-markdownlint"
   ]
 }
