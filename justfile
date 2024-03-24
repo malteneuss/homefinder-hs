@@ -19,8 +19,11 @@ run:
     ghcid -c "cabal repl exe:homefinder" --warnings -T :main
 
 # Start and seed local database, and autoremove all state with Ctrl+c
-db:
-    docker-compose -f ./docker-compose.yml up
+db: && dbup dbmigrate dbseed
+    @echo "Database started and seeded. Press Ctrl+c to stop and remove all state."
+
+dbup: 
+    docker-compose -f ./docker-compose.yml up -d
 dbdown:
     docker-compose -f ./docker-compose.yml down -v
 
@@ -31,7 +34,7 @@ dbseed:
     psql -d $DATABASE_URL -f ./db/seed.sql
 
 dbpeek tablename:
-    psql -d $DATABASE_URL -c "SELECT * FROM {{tablename}} LIMIT 10;"
+    psql -d $DATABASE_URL -c "SELECT * FROM {{tablename}} LIMIT 30;"
 
 dbdrop:
     dbmate drop
