@@ -65,4 +65,7 @@ common shared
 executable homefinder
   import:  shared
   main-is: Main.hs
-  -- TemplateDirectory: src/templates
+
+executable migrator
+  import:  shared
+  main-is: Migrator.hs

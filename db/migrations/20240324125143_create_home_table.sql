@@ -1,15 +1,12 @@
 -- migrate:up
+-- we need to create the extension to generate uuids
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE home(
     "id" UUID PRIMARY KEY UNIQUE DEFAULT uuid_generate_v4(),
     "title" VARCHAR NOT NULL,
     "price" INT8 NULL,
-import Data.Time.Clock (UTCTime)
-import Data.Time.Format (formatTime, defaultTimeLocale)
-
-formatUtcTime :: UTCTime -> String
-formatUtcTime utcTime = formatTime defaultTimeLocale "%Y-%m-%d %H:%M:%S" utcTime"address" VARCHAR NOT NULL,
+    "address" VARCHAR NOT NULL,
     "rooms" INT8 NULL,
     "sqm_living_space" INT8 NULL,
     "sqm_property_space" INT8 NULL,

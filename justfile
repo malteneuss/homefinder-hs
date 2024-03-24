@@ -19,7 +19,7 @@ run:
     ghcid -c "cabal repl exe:homefinder" --warnings -T :main
 
 # Start and seed local database, and autoremove all state with Ctrl+c
-db: && dbup dbmigrate dbseed
+db: && dbup dbmigrateall dbseed
     @echo "Database started and seeded. Press Ctrl+c to stop and remove all state."
 
 dbup: 
@@ -27,7 +27,12 @@ dbup:
 dbdown:
     docker-compose -f ./docker-compose.yml down -v
 
-dbmigrate:
+# print SQL code to do the next migration 
+dbprintmigration:
+    cabal run exe:migrator
+# create new migration script with dbmate new "name"
+
+dbmigrateall:
     dbmate up
 
 dbseed:
@@ -36,6 +41,14 @@ dbseed:
 dbpeek tablename:
     psql -d $DATABASE_URL -c "SELECT * FROM {{tablename}} LIMIT 30;"
 
+# Just create the database, but no tables or data
+dbcreate:
+    dbmate create
+# delete the database with all tables and data
 dbdrop:
     dbmate drop
+
+# show what postgres extensions are available
+dbshowextensions:
+    psql -d $DATABASE_URL -c "SELECT * FROM pg_available_extensions;"
  

@@ -9,7 +9,10 @@ module Settings where
 
 import Control.Exception qualified as Exception
 import Data.Aeson (FromJSON, Result (..), fromJSON, parseJSON, withObject, (.:))
+import Data.ByteString (ByteString)
 import Data.FileEmbed (embedFile)
+import Data.Text qualified as T
+import Data.Text.Encoding (encodeUtf8)
 import Data.Yaml (Value, decodeEither')
 import Yesod.Default.Config2 (applyEnvValue, configSettingsYml)
 
@@ -46,6 +49,20 @@ compileTimeAppSettings =
         -- case fromJSON $ configSettingsYmlValue of
         Error e -> error e
         Success settings -> settings
+
+mkConnectionString :: AppSettings -> ByteString
+mkConnectionString appSettings =
+    encodeUtf8 $
+        T.concat
+            [ "host="
+            , T.pack (appDatabaseHost appSettings)
+            , " dbname="
+            , T.pack (appDatabaseName appSettings)
+            , " user="
+            , T.pack (appDatabaseUser appSettings)
+            , " password="
+            , T.pack (appDatabasePassword appSettings)
+            ]
 
 instance FromJSON AppSettings where
     parseJSON = withObject "AppSettings" $ \o -> do
