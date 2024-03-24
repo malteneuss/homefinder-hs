@@ -49,6 +49,8 @@ common shared
     , persistent-postgresql
     , monad-logger
     , fast-logger   
+    , uuid
+    , path-pieces
 
   hs-source-dirs:     src
   default-language:   GHC2021
@@ -58,6 +60,7 @@ common shared
     StaticFiles
     Settings
     Widget.HomeListItem
+    DB.Model
 
 executable homefinder
   import:  shared

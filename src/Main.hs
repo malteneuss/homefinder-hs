@@ -6,11 +6,12 @@
 
 module Main where
 
-import Control.Monad.Logger (liftLoc, runLoggingT)
+import Control.Monad.Logger (liftLoc, runLoggingT, runStdoutLoggingT)
+import DB.Model (migrateAll)
 import Data.ByteString (ByteString)
 import Data.Text as T
 import Data.Text.Encoding (encodeUtf8)
-import Database.Persist.Postgresql (createPostgresqlPool)
+import Database.Persist.Postgresql (createPostgresqlPool, printMigration, runSqlPool)
 import Foundation (App (..), Route (HomeR, StaticR))
 import Handler.Home (getHomeR)
 import Settings (AppSettings (..), compileTimeAppSettings, compileTimeConfigSettings)
@@ -65,6 +66,7 @@ mkFoundation appSettings = do
   appDbConnPool <-
     flip runLoggingT logFunc $
       createPostgresqlPool (mkConnectionString appSettings) (appDatabasePoolsize appSettings)
+  runStdoutLoggingT $ flip runSqlPool appDbConnPool $ printMigration migrateAll
   return $ App{appStatic, appDbConnPool, appLogger}
 
 mkConnectionString :: AppSettings -> ByteString
