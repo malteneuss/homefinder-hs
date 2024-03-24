@@ -35,7 +35,6 @@ CREATE TABLE public.home (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
     title character varying NOT NULL,
     price bigint,
-    location character varying NOT NULL,
     address character varying NOT NULL,
     rooms bigint,
     sqm_living_space bigint,

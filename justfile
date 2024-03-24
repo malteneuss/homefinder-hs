@@ -32,4 +32,7 @@ dbseed:
 
 dbpeek tablename:
     psql -d $DATABASE_URL -c "SELECT * FROM {{tablename}} LIMIT 10;"
+
+dbdrop:
+    dbmate drop
  
