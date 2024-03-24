@@ -13,20 +13,33 @@ module DB.Model where
 import Data.Text (Text)
 import Database.Persist.TH (mkMigrate, mkPersist, persistLowerCase, share, sqlSettings)
 
+import Data.Time (UTCTime)
 import Data.UUID (UUID)
 import Data.UUID qualified as UUID
-import Database.Persist.Sql (PersistField (..), PersistFieldSql (..), PersistValue (..), SqlType (SqlOther), LiteralType (Escaped))
+import Database.Persist.Sql (LiteralType (Escaped), PersistField (..), PersistFieldSql (..), PersistStoreWrite (update), PersistValue (..), SqlType (SqlOther))
 import Web.PathPieces (PathPiece (..))
 
 share
     [mkPersist sqlSettings, mkMigrate "migrateAll"]
     [persistLowerCase|
-        Home
-            Id   UUID default=uuid_generate_v4()
-            name Text
-            price Int
-            location Text
-            deriving Show
+                Home
+                    Id   UUID default=uuid_generate_v4()
+                    title Text
+                    price Int Maybe
+                    address Text
+                    rooms Int Maybe
+                    sqmLivingSpace Int Maybe
+                    sqmPropertySpace Int Maybe
+                    bedrooms Int Maybe
+                    bathrooms Int Maybe
+                    details Text
+                    originalSource Text
+                    sourceUrl Text
+                    firstFetchDate UTCTime
+                    lastFetchDate UTCTime
+                    createdAt UTCTime default=now()
+                    updatedAt UTCTime
+                    deriving Show
         |]
 
 instance PersistField UUID where

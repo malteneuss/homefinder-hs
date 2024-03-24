@@ -23,3 +23,13 @@ db:
     docker-compose -f ./docker-compose.yml up
 dbdown:
     docker-compose -f ./docker-compose.yml down -v
+
+dbmigrate:
+    dbmate up
+
+dbseed:
+    psql -d $DATABASE_URL -f ./db/seed.sql
+
+dbpeek tablename:
+    psql -d $DATABASE_URL -c "SELECT * FROM {{tablename}} LIMIT 10;"
+ 

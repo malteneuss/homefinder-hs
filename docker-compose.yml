@@ -14,3 +14,5 @@ services:
     ports:
       # 5432 is the default port for postgres
       - ${DATABASE_PORT}:5432
+    # volumes:
+    #   - ./db/migrations:/docker-entrypoint-initdb.d

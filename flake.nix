@@ -95,6 +95,8 @@
             just
             # needed for command line tools like pg_config and psql
             postgresql_15
+            # manage database schema and migrations
+            dbmate
           ];
         };
       };
