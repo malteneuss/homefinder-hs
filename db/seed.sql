@@ -31,8 +31,8 @@ VALUES
         'https://example.com/listing/456',
         '2022-01-02',
         '2022-02-06',
-        CURRENT_TIMESTAMP,
-        CURRENT_TIMESTAMP
+        '2022-02-16 10:00:00',
+        '2022-02-16 10:00:00'
     ),
     (
         'Luxuriöse Villa am See',
@@ -48,8 +48,8 @@ VALUES
         'https://example.com/listing/789',
         '2022-01-03',
         '2022-02-07',
-        CURRENT_TIMESTAMP,
-        CURRENT_TIMESTAMP
+        '2022-02-16 11:00:00',
+        '2022-02-16 11:00:00'
     ),
     (
         'Moderne Wohnung in der Innenstadt',
@@ -65,8 +65,8 @@ VALUES
         'https://example.com/listing/123',
         '2022-01-04',
         '2022-02-08',
-        CURRENT_TIMESTAMP,
-        CURRENT_TIMESTAMP
+        '2022-02-16 12:00:00',
+        '2022-02-16 12:00:00'
     ),
     (
         'Einfamilienhaus im Grünen',
@@ -82,8 +82,8 @@ VALUES
         'https://example.com/listing/987',
         '2022-01-05',
         '2022-02-09',
-        CURRENT_TIMESTAMP,
-        CURRENT_TIMESTAMP
+        '2022-02-16 13:00:00',
+        '2022-02-16 13:00:00'
     ),
     (
         'Gemütliche Dachgeschosswohnung',
@@ -99,8 +99,8 @@ VALUES
         'https://example.com/listing/654',
         '2022-01-06',
         '2022-02-10',
-        CURRENT_TIMESTAMP,
-        CURRENT_TIMESTAMP
+        '2022-02-16 14:00:00',
+        '2022-02-16 14:00:00'
     ),
     (
         'Großes Einfamilienhaus mit Garten',
@@ -116,8 +116,8 @@ VALUES
         'https://example.com/listing/321',
         '2022-01-07',
         '2022-02-11',
-        CURRENT_TIMESTAMP,
-        CURRENT_TIMESTAMP
+        '2022-02-16 15:00:00',
+        '2022-02-16 15:00:00'
     ),
     (
         'Stilvolle Altbauwohnung',
@@ -133,8 +133,8 @@ VALUES
         'https://example.com/listing/789',
         '2022-01-08',
         '2022-02-12',
-        CURRENT_TIMESTAMP,
-        CURRENT_TIMESTAMP
+        '2022-02-16 16:00:00',
+        '2022-02-16 16:00:00'
     ),
     (
         'Modernes Loft in angesagtem Viertel',
@@ -150,8 +150,8 @@ VALUES
         'https://example.com/listing/234',
         '2022-01-09',
         '2022-02-13',
-        CURRENT_TIMESTAMP,
-        CURRENT_TIMESTAMP
+        '2022-02-16 17:00:00',
+        '2022-02-16 17:00:00'
     ),
     (
         'Charmantes Reihenhaus mit Garten',
@@ -167,8 +167,8 @@ VALUES
         'https://example.com/listing/567',
         '2022-01-10',
         '2022-02-14',
-        CURRENT_TIMESTAMP,
-        CURRENT_TIMESTAMP
+        '2022-02-16 18:00:00',
+        '2022-02-16 18:00:00'
     ),
     (
         'Großzügige Penthouse-Wohnung',
@@ -184,6 +184,6 @@ VALUES
         'https://example.com/listing/876',
         '2022-01-11',
         '2022-02-15',
-        CURRENT_TIMESTAMP,
-        CURRENT_TIMESTAMP
+        '2022-02-16 19:00:00',
+        '2022-02-16 19:00:00'
     );
