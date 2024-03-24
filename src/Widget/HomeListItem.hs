@@ -11,19 +11,17 @@ data HomeListItem = HomeListItem
     { imageUrl :: Maybe Text
     , title :: Text
     , address :: Text
-    , rooms :: Text
-    , sqmLivingSpace :: Text
-    , sqmPropertySpace :: Text
-    , bedrooms :: Text
-    , bathrooms :: Text
-    , price :: Text
+    , rooms :: Maybe Int
+    , sqmLivingSpace :: Maybe Int
+    , sqmPropertySpace :: Maybe Int
+    , bedrooms :: Maybe Int
+    , bathrooms :: Maybe Int
+    , price :: Maybe Int
     , details :: Text
     , originalSource :: Text
     , sourceUrl :: Text
-    , firstFetchDate :: Text
     , lastFetchDate :: Text
     }
-
 
 mkHomeListItemWidget :: HomeListItem -> Widget
 mkHomeListItemWidget home = $(whamletFile "templates/widget-home-list-item.hamlet")

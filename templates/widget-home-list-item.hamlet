@@ -10,11 +10,29 @@
             <div .media-content>
                 <p .title .is-4>#{home.title}
                 <p .subtitle .is-6>
-                     #{home.price}
+                     $maybe n <- home.price 
+                        #{n}€
+                    $nothing
+                        ?€
                      <br>
                      <small>#{home.address}
         <div .content>
-            #{home.sqmLivingSpace}, #{home.rooms}, #{home.bedrooms}, #{home.bathrooms}, 
+            $maybe n <- home.sqmLivingSpace 
+                #{n} qm
+            $nothing
+                ? qm
+            $maybe n <- home.rooms
+                #{n} rooms,
+            $nothing
+                ? rooms,
+            $maybe n <- home.bedrooms
+                #{n} bedrooms,
+            $nothing
+                ? bedrooms,
+            $maybe n <- home.bathrooms
+                #{n} bathrooms,
+            $nothing
+                ? bathrooms,
             <br>
             #{home.details}
             <br>

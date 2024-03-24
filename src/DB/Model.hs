@@ -11,16 +11,16 @@
 module DB.Model where
 
 import Data.Text (Text)
-import Database.Persist.TH (mkMigrate, mkPersist, persistLowerCase, share, sqlSettings)
+import Database.Persist.TH (mkMigrate, mkPersist, mpsPrefixFields, persistLowerCase, share, sqlSettings)
 
 import Data.Time (UTCTime)
 import Data.UUID (UUID)
 import Data.UUID qualified as UUID
-import Database.Persist.Sql (LiteralType (Escaped), PersistField (..), PersistFieldSql (..), PersistStoreWrite (update), PersistValue (..), SqlType (SqlOther))
+import Database.Persist.Sql (LiteralType (Escaped), PersistField (..), PersistFieldSql (..), PersistValue (..), SqlType (SqlOther))
 import Web.PathPieces (PathPiece (..))
 
 share
-    [mkPersist sqlSettings, mkMigrate "migrateAll"]
+    [mkPersist (sqlSettings{mpsPrefixFields = False}), mkMigrate "migrateAll"]
     [persistLowerCase|
                 Home
                     Id   UUID default=uuid_generate_v4()
