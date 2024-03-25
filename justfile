@@ -33,7 +33,7 @@ dbprintmigration:
 # create new migration script with dbmate new "name"
 
 dbmigrateall:
-    dbmate up
+    dbmate --wait up
 
 dbseed:
     psql -d $DATABASE_URL -f ./db/seed.sql
