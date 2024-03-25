@@ -22,24 +22,24 @@ import Web.PathPieces (PathPiece (..))
 share
     [mkPersist (sqlSettings{mpsPrefixFields = False}), mkMigrate "migrateAll"]
     [persistLowerCase|
-                Home
-                    Id   UUID default=uuid_generate_v4()
-                    title Text
-                    price Int Maybe
-                    address Text
-                    rooms Int Maybe
-                    sqmLivingSpace Int Maybe
-                    sqmPropertySpace Int Maybe
-                    bedrooms Int Maybe
-                    bathrooms Int Maybe
-                    details Text
-                    originalSource Text
-                    sourceUrl Text
-                    firstFetchDate UTCTime
-                    lastFetchDate UTCTime
-                    createdAt UTCTime default=now()
-                    updatedAt UTCTime
-                    deriving Show
+        Home
+            Id   UUID default=uuid_generate_v4()
+            title Text
+            price Int Maybe
+            address Text
+            rooms Int Maybe
+            sqmLivingSpace Int Maybe
+            sqmPropertySpace Int Maybe
+            bedrooms Int Maybe
+            bathrooms Int Maybe
+            details Text
+            originalSource Text
+            sourceUrl Text
+            firstFetchDate UTCTime
+            lastFetchDate UTCTime
+            createdAt UTCTime default=now()
+            updatedAt UTCTime
+            deriving Show
         |]
 
 instance PersistField UUID where
