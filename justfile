@@ -18,6 +18,9 @@ fmt:
 run:
     ghcid -c "cabal repl exe:homefinder" --warnings -T :main
 
+build:
+    ghcid -c "cabal build exe:homefinder" --warnings -T :main
+
 # Start and seed local database, and autoremove all state with Ctrl+c
 db: && dbup dbmigrateall dbseed
     @echo "Database started and seeded. Press Ctrl+c to stop and remove all state."
